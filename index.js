@@ -1,10 +1,26 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const bcrypt = require("bcryptjs")
 
 app.use(express.json());
 let items = [];
 let id = 1;
+
+const SECRET_KEY = "HELLOWTHISISIVERYBADSMSHSTHATPARHAINHI"
+
+function autheToken(req, res, next){
+
+  const authHeader = req.headers["authorization"];
+
+  const token = authHeader && authHeader.split(' ')[1];
+  if(!token)  return res.status(401).send("Access token missing");
+
+  jwt.verify(token, SECRET_KEY, (err, user) =>{
+    
+  })
+
+}
 
 app.post("/items",(req, res) =>{
   const {name} =  req.body;
